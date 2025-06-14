@@ -11,7 +11,7 @@ COPY app/ .
 RUN go mod download
 
 # 5. Build the Go binary
-RUN go build -o myfoodapplicaton_homelab
+RUN go build -o myfoodapplication_homelab
 
 # 6. Final stage: use minimal base image to run the binary
 FROM alpine:latest
@@ -20,11 +20,10 @@ FROM alpine:latest
 WORKDIR /app
 
 # 8. Copy the binary from builder stage
-COPY --from=builder /app/myfoodapplicaton_homelab .
-COPY --from=builder /app/.env .
+COPY --from=builder /app/myfoodapplication_homelab .
 
 # 9. Document the port the app listens on
 EXPOSE 8080
 
 # 10. Set default command to run
-CMD ["./myfoodapplicaton_homelab"]
+CMD ["./myfoodapplication_homelab"]
