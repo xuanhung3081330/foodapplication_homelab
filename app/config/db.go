@@ -2,23 +2,14 @@ package config
 
 import (
 	"database/sql"
-	"log"
 	"os"
 	"fmt"
-
-	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
 var DB *sql.DB
 
 func ConnectDB() error {
-	// Load .env file
-	err := godotenv.Load(".env")
-	if err != nil{
-		log.Fatalf("Error loading .env file. Detail: %s", err.Error())
-	}
-
 	// Get values from environment
 	host := os.Getenv("DB_HOST")
 	port := os.Getenv("DB_PORT")
