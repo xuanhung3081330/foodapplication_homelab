@@ -2,14 +2,23 @@ name: PR Workflow
 run-name: Build and Test GoLang application
 on: [pull_request]
 jobs:
-  Build:
+  Build_and_Linting:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v5
+      #- name: Caching
+      #  uses: actions/cache@v4
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
+      - name: Run linting to check the code
+        #working-directory: app
+        uses: dominikh/staticcheck-action@v1
+        with:
+          version: "latest"
+          install-go: false
+          working-directory: app
       - name: Build the application
         working-directory: app
         run: go build
