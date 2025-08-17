@@ -9,10 +9,10 @@ import (
 )
 
 type FoodHandler struct {
-	Service svcInterfaces.IFoodService
+	Service svcInterfaces.FoodService
 }
 
-func NewFoodHandler(svc svcInterfaces.IFoodService) *FoodHandler{
+func NewFoodHandler(svc svcInterfaces.FoodService) *FoodHandler{
 	return &FoodHandler{Service: svc}
 }
 
