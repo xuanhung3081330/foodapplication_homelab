@@ -1,7 +1,5 @@
 # foodapplication_homelab
 A simple food ordering API written in Go.  
-Currently paused, as I’m focusing on learning more Linux/OS internals.  
-I’ll resume development later.
 
 ## Purpose
 This project was created as a way to learn Go.  
