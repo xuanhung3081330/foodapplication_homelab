@@ -10,14 +10,6 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-      - name: Get to the app/ folder
-        run: |
-          cd app/
-          
-          echo "Running pwd to check the location"
-          pwd
-
-          echo "List out all the files in the current location"
-          ls -l
-      #- name: Build the application
-      #  run: go build
+      - name: Build the application
+        working-directory: app
+        run: go build
