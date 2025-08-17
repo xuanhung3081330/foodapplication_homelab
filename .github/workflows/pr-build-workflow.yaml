@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout the repository
-        run: actions/checkout@v4
+        run: actions/checkout@v5
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
