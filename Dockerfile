@@ -14,7 +14,7 @@ RUN go mod download
 RUN go build -o myfoodapplication_homelab
 
 # 6. Final stage: use minimal base image to run the binary
-FROM alpine:latest
+FROM alpine:3.22
 
 # 7. Create working directory
 WORKDIR /app
