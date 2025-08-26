@@ -22,17 +22,18 @@ jobs:
       - name: Build the application
         working-directory: app
         run: go build
-  Build_and_Push_Image:
+  
+  Build_Docker_image:
     runs-on: ubuntu-24.04
     needs: Build_and_Linting
     steps:
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      #- name: Login to Docker Hub
+      #  uses: docker/login-action@v3
+      #  with:
+      #    username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #    password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and Push
         uses: docker/build-push-action@v6
         with:
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/foodhomelab:latest
+          push: false # I don't think pushing image in CI step is a good decision. So I changed this to `false`
+          #tags: ${{ secrets.DOCKERHUB_USERNAME }}/foodhomelab:latest
