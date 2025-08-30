@@ -1,0 +1,12 @@
+#name: Deployment workflow
+
+#on:
+#  push:
+#    tags:
+#      - 'v*.*.*' # Trigger only on version tags
+
+#jobs:
+#  Deploy:
+#    runs-on: ubuntu-24.04
+#    steps:
+#      - name: 
