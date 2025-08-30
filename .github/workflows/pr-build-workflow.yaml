@@ -2,9 +2,8 @@ name: PR Workflow
 run-name: Build and Test GoLang application
 on: 
   pull_request:
-  push:
     branches:
-      - main
+      - master
     tags:
       - 'v*.*.*' # Build and push when we have a release tag too
 
@@ -42,8 +41,6 @@ jobs:
       - name: Build and Push
         uses: docker/build-push-action@v6
         with:
-          push: true # Push to Docker hub for CD workflow to use
+          push: false # CI workflow shouldn't push anything yet
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/foodhomelab:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/foodhomelab:${{ github.sha }}
-            ${{ github.ref_type == 'tag' && format('{0}/foodhomelab:{1}', secrets.DOCKERHUB_USERNAME, github.ref_name) || '' }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/foodhomelab:test
