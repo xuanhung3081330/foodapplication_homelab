@@ -1,12 +1,29 @@
-#name: Deployment workflow
+name: Deployment workflow
+run-name: Deploy Go App to Kubernetes
 
-#on:
-#  push:
-#    tags:
-#      - 'v*.*.*' # Trigger only on version tags
+on:
+  push:
+    branches:
+      - master # run only when code is merged into master
+    tags:
+      - 'v*.*.*'
 
-#jobs:
-#  Deploy:
-#    runs-on: ubuntu-24.04
-#    steps:
-#      - name: 
+jobs:
+  Build_and_Deploy:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v5
+      - name: Log into Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v6
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/foodhomelab:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/foodhomelab:${{ github.sha }}
+            ${{ github.ref_type == 'tag' && format('{0}/foodhomelab:{1}', secrets.DOCKERHUB_USERNAME, github.ref_name) || '' }}
+      # TODO: Deploy to k3s
